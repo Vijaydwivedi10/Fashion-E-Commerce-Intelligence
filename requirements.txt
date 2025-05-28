@@ -1,0 +1,14 @@
+streamlit
+pandas
+numpy
+nltk
+scikit-learn
+vaderSentiment
+groq
+plotly
+sumy
+yake
+seaborn
+matplotlib
+xlsxwriter
+plotly
