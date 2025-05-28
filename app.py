@@ -12,6 +12,16 @@ from data_utils import load_data, save_data, simulate_reviews, analyze_data
 from nlp_utils import analyzer, keyword_extractor, summarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
+
+import nltk
+
+# Download punkt only if it’s not already present
+try:
+    nltk.data.find("tokenizers/punkt")
+except LookupError:
+    nltk.download("punkt")
+
+
 from analysis_utils import (
     ASPECTS,
     compute_aspect_dataframe,
@@ -24,7 +34,6 @@ from analysis_utils import (
 # -------------------------------
 # Page Configuration & CSS
 # -------------------------------
-
 st.set_page_config(page_title="Fashion Review Intelligence", layout="wide")
 st.markdown("""
     <style>
