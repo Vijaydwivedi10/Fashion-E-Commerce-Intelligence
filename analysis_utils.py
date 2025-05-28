@@ -11,14 +11,17 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from groq import Groq
+# Define the NLTK data directory
+nltk_data_dir = os.path.join(os.path.dirname(__file__), 'nltk_data')
 
-nltk.data.path.insert(0, os.path.join(os.path.dirname(__file__), "nltk_data"))
-# Download punkt only if it’s not already present
+# Add the NLTK data directory to the NLTK data path
+nltk.data.path.append(nltk_data_dir)
+
+# Download 'punkt' if not already downloaded
 try:
-    nltk.data.find("tokenizers/punkt")
+    nltk.data.find('tokenizers/punkt')
 except LookupError:
-    nltk.download("punkt")
-
+    nltk.download('punkt', download_dir=nltk_data_dir)
 
 
 
