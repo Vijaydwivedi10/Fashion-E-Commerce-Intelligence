@@ -12,7 +12,7 @@ from sklearn.metrics import silhouette_score
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from groq import Groq
 
-
+nltk.data.path.insert(0, os.path.join(os.path.dirname(__file__), "nltk_data"))
 # Download punkt only if it’s not already present
 try:
     nltk.data.find("tokenizers/punkt")
