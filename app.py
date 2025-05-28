@@ -15,6 +15,9 @@ from sumy.nlp.tokenizers import Tokenizer
 
 import nltk
 # Define the NLTK data directory
+
+os.environ['NLTK_DATA'] = 'nltk_data'
+
 nltk_data_dir = os.path.join(os.path.dirname(__file__), 'nltk_data')
 
 # Add the NLTK data directory to the NLTK data path
