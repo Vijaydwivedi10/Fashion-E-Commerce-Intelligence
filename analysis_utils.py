@@ -13,6 +13,12 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from groq import Groq
 
 
+# Download punkt only if it’s not already present
+try:
+    nltk.data.find("tokenizers/punkt")
+except LookupError:
+    nltk.download("punkt")
+
 
 
 
