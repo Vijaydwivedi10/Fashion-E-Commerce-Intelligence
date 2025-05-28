@@ -1,4 +1,22 @@
 import os
+import nltk
+# ———————————————————————————————————————————————
+# 1. Define where your repo’s nltk_data folder lives
+HERE = os.path.dirname(__file__)
+NLTK_DATA = os.path.join(HERE, "nltk_data")
+
+# 2. Make sure NLTK will look there
+nltk.data.path.insert(0, NLTK_DATA)
+os.environ["NLTK_DATA"] = NLTK_DATA
+
+# 3. Download missing models at runtime
+for pkg in ("punkt", "stopwords", "punkt_tab"):
+    try:
+        nltk.data.find(f"tokenizers/{pkg}")
+    except LookupError:
+        nltk.download(pkg, download_dir=NLTK_DATA, quiet=True)
+
+
 import base64
 from io import BytesIO
 from datetime import datetime
@@ -12,16 +30,6 @@ from data_utils import load_data, save_data, simulate_reviews, analyze_data
 from nlp_utils import analyzer, keyword_extractor, summarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
-
-import nltk
-# Define the NLTK data directory
-
-os.environ['NLTK_DATA'] = 'nltk_data'
-
-nltk_data_dir = os.path.join(os.path.dirname(__file__), 'nltk_data')
-
-# Add the NLTK data directory to the NLTK data path
-nltk.data.path.append(nltk_data_dir)
 
 # Download 'punkt' if not already downloaded
 try:

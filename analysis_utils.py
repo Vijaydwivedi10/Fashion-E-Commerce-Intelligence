@@ -1,29 +1,33 @@
 import os
+import nltk
+# ———————————————————————————————————————————————
+# 1. Define where your repo’s nltk_data folder lives
+HERE = os.path.dirname(__file__)
+NLTK_DATA = os.path.join(HERE, "nltk_data")
+
+# 2. Make sure NLTK will look there
+nltk.data.path.insert(0, NLTK_DATA)
+os.environ["NLTK_DATA"] = NLTK_DATA
+
+# 3. Download missing models at runtime
+for pkg in ("punkt", "stopwords", "punkt_tab"):
+    try:
+        nltk.data.find(f"tokenizers/{pkg}")
+    except LookupError:
+        nltk.download(pkg, download_dir=NLTK_DATA, quiet=True)
+
+
 import logging
 from typing import List, Dict
 
 import numpy as np
 import pandas as pd
-import nltk
 from nltk.tokenize import sent_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from groq import Groq
-# Define the NLTK data directory
-nltk_data_dir = os.path.join(os.path.dirname(__file__), 'nltk_data')
-
-# Add the NLTK data directory to the NLTK data path
-nltk.data.path.append(nltk_data_dir)
-
-# Download 'punkt' if not already downloaded
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt', download_dir=nltk_data_dir)
-
-
 
 # Download necessary NLTK data
 nltk.download('punkt', quiet=True)
