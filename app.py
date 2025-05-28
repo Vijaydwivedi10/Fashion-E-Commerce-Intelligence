@@ -23,6 +23,8 @@ try:
 except LookupError:
     nltk.download("punkt")
 
+print("NLTK paths:", nltk.data.path)
+print("Found:", nltk.find("tokenizers/punkt"))
 
 from analysis_utils import (
     ASPECTS,
